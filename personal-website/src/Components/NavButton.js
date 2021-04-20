@@ -1,7 +1,7 @@
 const NavButton = (props) =>{
     return(
         <div>
-            <button className="NavButton">{props.buttonText}</button>
+            <button className="navButton">{props.buttonText}</button>
         </div>
     )
 }

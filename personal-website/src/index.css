@@ -22,13 +22,17 @@ code {
   display: flex;
   flex-direction: column;
   background-color: gray;
-  border-radius: 10px;
+  border-radius: 4px;
   
 }
 .contactListing{
   font-size: 10px;
   display: flex;
 
+}
+.headerName{
+  font-size: 60px;
+  margin-bottom: 20px;
 }
 .listingTitle{
   margin-right: 5px;
@@ -49,8 +53,13 @@ code {
 .navButton{
   background-color: black;
   color: white;
+  width: 100px;
+  height: 40px;
+  border: solid white;
+  border-radius: 4px;
 }
 .navBar{
   display: flex;
   justify-content: center;
+  
 }

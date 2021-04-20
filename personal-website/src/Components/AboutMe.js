@@ -1,14 +1,12 @@
-import ContactListing from "./ContactsListing"
+import AboutMeContact from "./AboutContact"
+
+import AboutMeP from"./AboutMeP"
 
 const AboutMe = (props) =>{
     return(
         <div className="aboutMe">
-            <div>About Me</div>
-            <ContactListing listingTitle="Web" listingContent ="GraysonMcClead.com"/>
-            <ContactListing listingTitle="Phone" listingContent ="806-407-1830"/>
-            <ContactListing listingTitle="Email" listingContent ="elgrayso@gmail.com"/>
-
-
+            <AboutMeContact />
+            <AboutMeP />
         </div>
     ) 
 }
