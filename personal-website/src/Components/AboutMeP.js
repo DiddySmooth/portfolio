@@ -1,6 +1,6 @@
 const AboutMeP = () => {
     return(
-        <div>
+        <div className="">
             this is just a sample scentence
         </div>
     )
