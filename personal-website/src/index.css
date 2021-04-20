@@ -11,3 +11,46 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.App{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.aboutMe{
+  width: 150px;
+  display: flex;
+  flex-direction: column;
+  background-color: gray;
+  border-radius: 10px;
+  
+}
+.contactListing{
+  font-size: 10px;
+  display: flex;
+
+}
+.listingTitle{
+  margin-right: 5px;
+  font-weight: bold;
+  margin-right: 10px;
+}
+.listingTitleCont{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 35px;
+}
+.listingContentCont{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.navButton{
+  background-color: black;
+  color: white;
+}
+.navBar{
+  display: flex;
+  justify-content: center;
+}
