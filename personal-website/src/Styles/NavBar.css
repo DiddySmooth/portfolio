@@ -1,0 +1,30 @@
+.navButton{
+    background-color: black;
+    color: white;
+    width: 100px;
+    height: 40px;
+    margin-left: 50px;
+    margin-right: 50px;
+    text-decoration: none;
+}
+.navBar{
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+    background-color: black;
+    
+}
+.headerName{
+    font-size: 60px;
+    margin-bottom: 20px;
+    font-family: 'Playfair Display', serif;
+}
+.topPage{
+    background-color: #006666;
+    background-size: cover;
+    width: 100vw;
+    height: 210px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
