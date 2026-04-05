@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jordan Lee — Dev Blog</title>
+  <meta name="description" content="Technical articles, tutorials, and dev logs by Jordan Lee — a full stack developer passionate about clean code and great UX." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ── Navigation ── -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo" aria-label="Jordan Lee — Home">
+        <span class="logo-bracket">&lt;</span><span class="logo-name">jordan.dev</span><span class="logo-bracket">/&gt;</span>
+      </a>
+      <div class="nav-menu" id="navMenu" role="navigation" aria-label="Main navigation">
+        <a href="index.html" class="nav-link active" aria-current="page">Blog</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navMenu">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </button>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- ── Page Hero ── -->
+    <section class="page-hero">
+      <div class="container">
+        <span class="page-hero-label">Dev Journal</span>
+        <h1 class="page-hero-title">The Dev Blog</h1>
+        <p class="page-hero-desc">Tutorials, dev logs, and opinions from the trenches of modern full stack development. No fluff — just signal.</p>
+      </div>
+    </section>
+
+    <!-- ── Featured Post ── -->
+    <section class="featured-section" aria-labelledby="featured-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label">Featured Article</span>
+          <div class="section-divider" aria-hidden="true"></div>
+        </div>
+        <article class="featured-post">
+          <div class="featured-post-media" aria-hidden="true">
+            <div class="featured-post-art">
+              <div class="featured-art-icon">⚡</div>
+            </div>
+            <span class="featured-post-label">Featured</span>
+          </div>
+          <div class="featured-post-content">
+            <div class="featured-post-meta">
+              <span class="tag tag-tutorials">Tutorials</span>
+              <span class="featured-post-date">Mar 28, 2026</span>
+              <span class="featured-post-read-time">· 12 min read</span>
+            </div>
+            <h2 class="featured-post-title" id="featured-heading">
+              Building Type-Safe APIs with TypeScript and Zod: A Production Guide
+            </h2>
+            <p class="featured-post-excerpt">
+              Runtime validation is the missing piece in most TypeScript projects. In this deep-dive, I walk through integrating Zod with Express to create truly type-safe API endpoints — from request validation to response serialization, with full end-to-end type inference that actually catches bugs at the boundaries.
+            </p>
+            <a href="#" class="featured-post-link">
+              Read Full Article
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ── Search & Filter ── -->
+    <section class="search-filter-bar" aria-label="Search and filter articles">
+      <div class="container">
+        <div class="search-filter-inner">
+
+          <div class="search-wrapper">
+            <span class="search-icon" aria-hidden="true">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+              </svg>
+            </span>
+            <input
+              type="search"
+              class="search-input"
+              id="searchInput"
+              placeholder="Search articles…"
+              aria-label="Search articles"
+              autocomplete="off"
+              spellcheck="false"
+            />
+          </div>
+
+          <div class="filter-buttons" role="group" aria-label="Filter articles by category">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="tutorials">Tutorials</button>
+            <button class="filter-btn" data-filter="devlog">Dev Log</button>
+            <button class="filter-btn" data-filter="opinion">Opinion</button>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Blog Grid ── -->
+    <section class="blog-grid-section" aria-labelledby="articles-heading">
+      <div class="container">
+        <div class="blog-grid-header">
+          <h2 class="blog-grid-title" id="articles-heading">Recent Articles</h2>
+          <span class="blog-count" id="articleCount" aria-live="polite">7 articles</span>
+        </div>
+
+        <div class="blog-grid" id="blogGrid">
+
+          <!-- Article 1 -->
+          <article class="blog-card"
+            data-category="devlog"
+            data-title="my journey from junior to senior developer what i wish i knew"
+            data-tags="career growth mindset learning">
+            <div class="card-header">
+              <span class="tag tag-devlog">Dev Log</span>
+              <span class="card-read-time">7 min read</span>
+            </div>
+            <h3 class="card-title">
+              <a href="#">My Journey from Junior to Senior Developer: What I Wish I Knew</a>
+            </h3>
+            <p class="card-excerpt">Five years, three companies, and countless bugs later — the non-technical lessons that made the biggest difference in my growth as an engineer.</p>
+            <div class="card-footer">
+              <span class="card-date">Mar 20, 2026</span>
+              <a href="#" class="card-link">
+                Read More
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- Article 2 -->
+          <article class="blog-card"
+            data-category="opinion"
+            data-title="why im betting on react server components in 2026"
+            data-tags="react frontend architecture rsc server components">
+            <div class="card-header">
+              <span class="tag tag-opinion">Opinion</span>
+              <span class="card-read-time">9 min read</span>
+            </div>
+            <h3 class="card-title">
+              <a href="#">Why I'm Betting on React Server Components in 2026</a>
+            </h3>
+            <p class="card-excerpt">The mental model shift is steep, but after six months in production I'm convinced RSCs are the right abstraction for most full stack applications.</p>
+            <div class="card-footer">
+              <span class="card-date">Mar 12, 2026</span>
+              <a href="#" class="card-link">
+                Read More
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- Article 3 -->
+          <article class="blog-card"
+            data-category="tutorials"
+            data-title="mastering git advanced workflows for high-velocity teams"
+            data-tags="git devops workflow version control trunk-based rebase">
+            <div class="card-header">
+              <span class="tag tag-tutorials">Tutorials</span>
+              <span class="card-read-time">10 min read</span>
+            </div>
+            <h3 class="card-title">
+              <a href="#">Mastering Git: Advanced Workflows for High-Velocity Teams</a>
+            </h3>
+            <p class="card-excerpt">From trunk-based development to interactive rebasing and custom hooks — a practical guide to leveling up your team's version control workflow.</p>
+            <div class="card-footer">
+              <span class="card-date">Mar 5, 2026</span>
+              <a href="#" class="card-link">
+                Read More
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- Article 4 -->
+          <article class="blog-card"
+            data-category="devlog"
+            data-title="six months with rust lessons from a javascript developer"
+            data-tags="rust systems programming learning borrow checker memory safety">
+            <div class="card-header">
+              <span class="tag tag-devlog">Dev Log</span>
+              <span class="card-read-time">6 min read</span>
+            </div>
+            <h3 class="card-title">
+              <a href="#">Six Months with Rust: Lessons from a JavaScript Developer</a>
+            </h3>
+            <p class="card-excerpt">The borrow checker is humbling, memory safety is liberating, and compile times will test your patience. My honest six-month retrospective.</p>
+            <div class="card-footer">
+              <span class="card-date">Feb 22, 2026</span>
+              <a href="#" class="card-link">
+                Read More
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- Article 5 -->
+          <article class="blog-card"
+            data-category="opinion"
+            data-title="the state of css in 2026 we actually won"
+            data-tags="css frontend design web container queries cascade layers has">
+            <div class="card-header">
+              <span class="tag tag-opinion">Opinion</span>
+              <span class="card-read-time">5 min read</span>
+            </div>
+            <h3 class="card-title">
+              <a href="#">The State of CSS in 2026: We Actually Won</a>
+            </h3>
+            <p class="card-excerpt">Container queries, cascade layers, <code>:has()</code>, and native nesting — CSS has had a remarkable few years. Here's why styling has never been better (mostly).</p>
+            <div class="card-footer">
+              <span class="card-date">Feb 14, 2026</span>
+              <a href="#" class="card-link">
+                Read More
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- Article 6 -->
+          <article class="blog-card"
+            data-category="tutorials"
+            data-title="building a real-time dashboard with websockets and react"
+            data-tags="websockets react node realtime dashboard performance">
+            <div class="card-header">
+              <span class="tag tag-tutorials">Tutorials</span>
+              <span class="card-read-time">14 min read</span>
+            </div>
+            <h3 class="card-title">
+              <a href="#">Building a Real-Time Dashboard with WebSockets and React</a>
+            </h3>
+            <p class="card-excerpt">A comprehensive walkthrough covering WebSocket server setup, React integration, reconnection logic, and keeping the UI performant under heavy data load.</p>
+            <div class="card-footer">
+              <span class="card-date">Feb 3, 2026</span>
+              <a href="#" class="card-link">
+                Read More
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- Article 7 -->
+          <article class="blog-card"
+            data-category="devlog"
+            data-title="open source contributions a practical starting guide"
+            data-tags="open source community git github pull request contribution">
+            <div class="card-header">
+              <span class="tag tag-devlog">Dev Log</span>
+              <span class="card-read-time">5 min read</span>
+            </div>
+            <h3 class="card-title">
+              <a href="#">Open Source Contributions: A Practical Starting Guide</a>
+            </h3>
+            <p class="card-excerpt">Finding your first issue, reading codebases you didn't write, and surviving your first PR review — the unglamorous reality of contributing to open source.</p>
+            <div class="card-footer">
+              <span class="card-date">Jan 27, 2026</span>
+              <a href="#" class="card-link">
+                Read More
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </a>
+            </div>
+          </article>
+
+        </div><!-- /blog-grid -->
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <p class="footer-text">© 2026 Jordan Lee. Crafted with care and a lot of coffee.</p>
+      <nav class="footer-links" aria-label="Footer">
+        <a href="index.html">Blog</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="../_app/immutable/entry/start.DlX144NM.js" rel="modulepreload">
+		<link href="../_app/immutable/chunks/Bz7WM8Gi.js" rel="modulepreload">
+		<link href="../_app/immutable/chunks/B_8hqEmp.js" rel="modulepreload">
+		<link href="../_app/immutable/entry/app.Ch5BvTRR.js" rel="modulepreload">
+		<link href="../_app/immutable/chunks/DwYFcQ4T.js" rel="modulepreload">
+		<link href="../_app/immutable/nodes/0.U3NbvFyC.js" rel="modulepreload">
+		<link href="../_app/immutable/chunks/DXIJif5j.js" rel="modulepreload">
+		<link href="../_app/immutable/nodes/5.dhgtPbho.js" rel="modulepreload">
+		<link href="../_app/immutable/chunks/C7HZ6YVH.js" rel="modulepreload">
+		<title>Building This Portfolio with SvelteKit — Grayson McClead</title><!-- HEAD_svelte-3ojo5q_START --><meta name="description" content="How I rebuilt my portfolio from scratch — static HTML to a SvelteKit site with a markdown-powered blog, reactive search, and a single global stylesheet."><!-- HEAD_svelte-3ojo5q_END -->
+		<link href="../_app/immutable/assets/0.C94JAEjI.css" rel="stylesheet">
+  </head>
+  <body data-sveltekit-preload-data="hover">
+    <div style="display: contents">   <nav class="navbar"><div class="nav-container"><a href="/" class="nav-logo" aria-label="Grayson McClead — Home" data-svelte-h="svelte-1jksg6a"><span class="logo-bracket">&lt;</span><span class="logo-name">grayson.dev</span><span class="logo-bracket">/&gt;</span></a> <div class="nav-menu" id="navMenu" role="navigation" aria-label="Main navigation"><a href="/" class="nav-link">About</a> <a href="/blog" class="nav-link active" aria-current="page">Blog</a> <a href="/contact" class="nav-link">Contact</a></div> <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navMenu"><span aria-hidden="true"></span> <span aria-hidden="true"></span> <span aria-hidden="true"></span></button></div></nav>  <main><article class="post-page"><div class="container"><header class="post-header"><a href="/blog" class="back-link" data-svelte-h="svelte-vqhbui">← Back to Blog</a> <div class="post-meta"><span class="tag tag-devlog">Dev Log</span> <span class="post-date">Mar 31, 2026</span> <span class="post-read-time">· 7 min read</span></div> <h1 class="post-title">Building This Portfolio with SvelteKit</h1> <p class="post-subtitle">How I rebuilt my portfolio from scratch — static HTML to a SvelteKit site with a markdown-powered blog, reactive search, and a single global stylesheet.</p> <div class="post-tech-stack" aria-label="Technologies used"><span class="tech-pill">svelte</span><span class="tech-pill">sveltekit</span><span class="tech-pill">vite</span><span class="tech-pill">typescript</span><span class="tech-pill">markdown</span><span class="tech-pill">gray-matter</span><span class="tech-pill">static-site</span></div></header> <div class="prose"><!-- HTML_TAG_START --><p>I&#39;ve had a plain HTML/CSS portfolio sitting around longer than I care to admit. It worked, but adding anything new meant editing raw HTML, and there was no real blog to write on. So I rebuilt it from scratch with SvelteKit.</p>
+<p>This post covers the decisions that shaped the final result.</p>
+<h2>Why SvelteKit?</h2>
+<p>I considered the usual suspects — Next.js, Astro, Nuxt — but landed on SvelteKit for a few reasons:</p>
+<ul>
+<li><strong>No virtual DOM overhead.</strong> Svelte compiles to vanilla JS. For a personal site, that&#39;s the correct tradeoff: tiny bundles, instant paint.</li>
+<li><strong>File-based routing out of the box.</strong> No router config. A file at <code>src/routes/contact/+page.svelte</code> is just <code>/contact</code>.</li>
+<li><strong><code>adapter-static</code> is perfect here.</strong> This site has no dynamic server requirements — it&#39;s prerendered HTML/CSS/JS, deployable anywhere.</li>
+</ul>
+<p>The full site builds in under 5 seconds and ships as static files with no runtime dependency.</p>
+<h2>Static Prerendering</h2>
+<p>One line in <code>+layout.js</code> enables full static export:</p>
+<pre><code class="language-js">export const prerender = true;
+</code></pre>
+<p>SvelteKit walks every route at build time and writes <code>.html</code> files. For dynamic routes like <code>/blog/[slug]</code>, you export an <code>entries()</code> function that tells the builder which slugs exist:</p>
+<pre><code class="language-js">export function entries() {
+  return getAllPosts().map((p) =&gt; ({ slug: p.slug }));
+}
+</code></pre>
+<p>At build time, SvelteKit calls <code>entries()</code>, then calls <code>load()</code> for each slug, and outputs a static HTML file per post. Zero server needed at runtime.</p>
+<h2>Markdown-Powered Blog</h2>
+<p>Posts live as <code>.md</code> files in <code>src/lib/posts/</code>. Vite&#39;s <code>import.meta.glob</code> pulls them all in at build time:</p>
+<pre><code class="language-js">const rawPosts = import.meta.glob(&#39;/src/lib/posts/*.md&#39;, {
+  query: &#39;?raw&#39;,
+  import: &#39;default&#39;,
+  eager: true
+});
+</code></pre>
+<p>From there, <code>gray-matter</code> parses the YAML frontmatter and <code>marked</code> converts the markdown body to HTML:</p>
+<pre><code class="language-js">import matter from &#39;gray-matter&#39;;
+import { marked } from &#39;marked&#39;;
+
+const { data, content } = matter(raw);
+const html = marked.parse(content);
+</code></pre>
+<p>No databases, no CMS, no API calls. A new post is just a new <code>.md</code> file with a frontmatter block:</p>
+<pre><code class="language-yaml">---
+title: &quot;Post Title&quot;
+date: &quot;2026-04-01&quot;
+category: tutorials
+tags: react typescript
+excerpt: &quot;Short description shown on the blog card.&quot;
+readTime: 5 min read
+---
+</code></pre>
+<p>Drop the file in, rebuild, done.</p>
+<h2>Reactive Search Without a State Library</h2>
+<p>The blog index has live search and category filtering. In React I&#39;d reach for <code>useState</code> and <code>useEffect</code>. In Svelte, reactive statements (<code>$:</code>) handle this without any imports:</p>
+<pre><code class="language-svelte">&lt;script&gt;
+  let search = &#39;&#39;;
+  let activeFilter = &#39;all&#39;;
+
+  $: filteredPosts = data.posts.filter((post) =&gt; {
+    const matchFilter = activeFilter === &#39;all&#39; || post.category === activeFilter;
+    const query = search.toLowerCase().trim();
+    return (
+      matchFilter &amp;&amp;
+      (!query ||
+        post.title.toLowerCase().includes(query) ||
+        post.tags.includes(query))
+    );
+  });
+&lt;/script&gt;
+
+&lt;input bind:value={search} placeholder=&quot;Search articles…&quot; /&gt;
+</code></pre>
+<p><code>filteredPosts</code> recomputes automatically whenever <code>search</code> or <code>activeFilter</code> changes. No <code>useEffect</code>, no dependency arrays, no stale closure bugs.</p>
+<h2>Single Global Stylesheet</h2>
+<p>I kept one global <code>src/app.css</code> instead of scoped component styles. For a site this size, global CSS with custom properties is simpler to reason about than per-component styles:</p>
+<pre><code class="language-css">:root {
+  --evergreen:   #132a13;
+  --hunter-green: #31572c;
+  --fern:        #4f772d;
+  --palm-leaf:   #90a955;
+  --lime-cream:  #ecf39e;
+}
+</code></pre>
+<p>Every component reads from these variables, so tweaking the palette is a single-file change.</p>
+<h2>Mobile Nav Without a Library</h2>
+<p>The hamburger nav closes on outside click using <code>bind:this</code> — a direct reference to the DOM node — rather than a click listener on <code>document</code>:</p>
+<pre><code class="language-svelte">&lt;script&gt;
+  let navEl;
+  function handleWindowClick(e) {
+    if (navOpen &amp;&amp; !navEl.contains(e.target)) navOpen = false;
+  }
+&lt;/script&gt;
+
+&lt;svelte:window on:click={handleWindowClick} /&gt;
+&lt;nav bind:this={navEl}&gt;...&lt;/nav&gt;
+</code></pre>
+<p>This avoids the a11y lint warning Svelte raises when you put <code>on:click</code> on a non-interactive element, and it&#39;s simpler than a click-outside directive.</p>
+<h2>What I&#39;d Do Differently</h2>
+<ul>
+<li><strong>Add syntax highlighting.</strong> <code>marked</code> renders code blocks as plain <code>&lt;pre&gt;&lt;code&gt;</code>, no token colors. Shiki or Prism would fix that.</li>
+<li><strong>RSS feed.</strong> Easy with SvelteKit — a <code>src/routes/rss.xml/+server.js</code> that returns the posts as XML.</li>
+<li><strong>OG image generation.</strong> Auto-generated social preview cards per post would be a nice touch.</li>
+</ul>
+<h2>Stack</h2>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Tool</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Framework</td>
+<td>SvelteKit 2</td>
+</tr>
+<tr>
+<td>Build</td>
+<td>Vite 5</td>
+</tr>
+<tr>
+<td>Markdown parsing</td>
+<td>gray-matter + marked</td>
+</tr>
+<tr>
+<td>CSS</td>
+<td>Vanilla CSS, custom properties</td>
+</tr>
+<tr>
+<td>Deployment</td>
+<td>Static files (adapter-static)</td>
+</tr>
+</tbody></table>
+<p>None of this is groundbreaking — it&#39;s a deliberately boring stack. For a personal site, boring is correct.</p>
+<!-- HTML_TAG_END --></div></div></article></main> <footer class="footer" data-svelte-h="svelte-wid1ib"><div class="footer-inner"><p class="footer-text">© 2026 Grayson McClead. Crafted with care and a lot of coffee.</p> <nav class="footer-links" aria-label="Footer"><a href="/">Blog</a> <a href="/about">About</a> <a href="/contact">Contact</a></nav></div></footer> 
+			
+			<script>
+				{
+					__sveltekit_1jljwam = {
+						base: new URL("..", location).pathname.slice(0, -1)
+					};
+
+					const element = document.currentScript.parentElement;
+
+					Promise.all([
+						import("../_app/immutable/entry/start.DlX144NM.js"),
+						import("../_app/immutable/entry/app.Ch5BvTRR.js")
+					]).then(([kit, app]) => {
+						kit.start(app, element, {
+							node_ids: [0, 5],
+							data: [null,{type:"data",data:{title:"Building This Portfolio with SvelteKit",date:"2026-03-31",category:"devlog",tags:"svelte sveltekit vite typescript markdown gray-matter static-site",excerpt:"How I rebuilt my portfolio from scratch — static HTML to a SvelteKit site with a markdown-powered blog, reactive search, and a single global stylesheet.",readTime:"7 min read",html:"\u003Cp>I&#39;ve had a plain HTML/CSS portfolio sitting around longer than I care to admit. It worked, but adding anything new meant editing raw HTML, and there was no real blog to write on. So I rebuilt it from scratch with SvelteKit.\u003C/p>\n\u003Cp>This post covers the decisions that shaped the final result.\u003C/p>\n\u003Ch2>Why SvelteKit?\u003C/h2>\n\u003Cp>I considered the usual suspects — Next.js, Astro, Nuxt — but landed on SvelteKit for a few reasons:\u003C/p>\n\u003Cul>\n\u003Cli>\u003Cstrong>No virtual DOM overhead.\u003C/strong> Svelte compiles to vanilla JS. For a personal site, that&#39;s the correct tradeoff: tiny bundles, instant paint.\u003C/li>\n\u003Cli>\u003Cstrong>File-based routing out of the box.\u003C/strong> No router config. A file at \u003Ccode>src/routes/contact/+page.svelte\u003C/code> is just \u003Ccode>/contact\u003C/code>.\u003C/li>\n\u003Cli>\u003Cstrong>\u003Ccode>adapter-static\u003C/code> is perfect here.\u003C/strong> This site has no dynamic server requirements — it&#39;s prerendered HTML/CSS/JS, deployable anywhere.\u003C/li>\n\u003C/ul>\n\u003Cp>The full site builds in under 5 seconds and ships as static files with no runtime dependency.\u003C/p>\n\u003Ch2>Static Prerendering\u003C/h2>\n\u003Cp>One line in \u003Ccode>+layout.js\u003C/code> enables full static export:\u003C/p>\n\u003Cpre>\u003Ccode class=\"language-js\">export const prerender = true;\n\u003C/code>\u003C/pre>\n\u003Cp>SvelteKit walks every route at build time and writes \u003Ccode>.html\u003C/code> files. For dynamic routes like \u003Ccode>/blog/[slug]\u003C/code>, you export an \u003Ccode>entries()\u003C/code> function that tells the builder which slugs exist:\u003C/p>\n\u003Cpre>\u003Ccode class=\"language-js\">export function entries() {\n  return getAllPosts().map((p) =&gt; ({ slug: p.slug }));\n}\n\u003C/code>\u003C/pre>\n\u003Cp>At build time, SvelteKit calls \u003Ccode>entries()\u003C/code>, then calls \u003Ccode>load()\u003C/code> for each slug, and outputs a static HTML file per post. Zero server needed at runtime.\u003C/p>\n\u003Ch2>Markdown-Powered Blog\u003C/h2>\n\u003Cp>Posts live as \u003Ccode>.md\u003C/code> files in \u003Ccode>src/lib/posts/\u003C/code>. Vite&#39;s \u003Ccode>import.meta.glob\u003C/code> pulls them all in at build time:\u003C/p>\n\u003Cpre>\u003Ccode class=\"language-js\">const rawPosts = import.meta.glob(&#39;/src/lib/posts/*.md&#39;, {\n  query: &#39;?raw&#39;,\n  import: &#39;default&#39;,\n  eager: true\n});\n\u003C/code>\u003C/pre>\n\u003Cp>From there, \u003Ccode>gray-matter\u003C/code> parses the YAML frontmatter and \u003Ccode>marked\u003C/code> converts the markdown body to HTML:\u003C/p>\n\u003Cpre>\u003Ccode class=\"language-js\">import matter from &#39;gray-matter&#39;;\nimport { marked } from &#39;marked&#39;;\n\nconst { data, content } = matter(raw);\nconst html = marked.parse(content);\n\u003C/code>\u003C/pre>\n\u003Cp>No databases, no CMS, no API calls. A new post is just a new \u003Ccode>.md\u003C/code> file with a frontmatter block:\u003C/p>\n\u003Cpre>\u003Ccode class=\"language-yaml\">---\ntitle: &quot;Post Title&quot;\ndate: &quot;2026-04-01&quot;\ncategory: tutorials\ntags: react typescript\nexcerpt: &quot;Short description shown on the blog card.&quot;\nreadTime: 5 min read\n---\n\u003C/code>\u003C/pre>\n\u003Cp>Drop the file in, rebuild, done.\u003C/p>\n\u003Ch2>Reactive Search Without a State Library\u003C/h2>\n\u003Cp>The blog index has live search and category filtering. In React I&#39;d reach for \u003Ccode>useState\u003C/code> and \u003Ccode>useEffect\u003C/code>. In Svelte, reactive statements (\u003Ccode>$:\u003C/code>) handle this without any imports:\u003C/p>\n\u003Cpre>\u003Ccode class=\"language-svelte\">&lt;script&gt;\n  let search = &#39;&#39;;\n  let activeFilter = &#39;all&#39;;\n\n  $: filteredPosts = data.posts.filter((post) =&gt; {\n    const matchFilter = activeFilter === &#39;all&#39; || post.category === activeFilter;\n    const query = search.toLowerCase().trim();\n    return (\n      matchFilter &amp;&amp;\n      (!query ||\n        post.title.toLowerCase().includes(query) ||\n        post.tags.includes(query))\n    );\n  });\n&lt;/script&gt;\n\n&lt;input bind:value={search} placeholder=&quot;Search articles…&quot; /&gt;\n\u003C/code>\u003C/pre>\n\u003Cp>\u003Ccode>filteredPosts\u003C/code> recomputes automatically whenever \u003Ccode>search\u003C/code> or \u003Ccode>activeFilter\u003C/code> changes. No \u003Ccode>useEffect\u003C/code>, no dependency arrays, no stale closure bugs.\u003C/p>\n\u003Ch2>Single Global Stylesheet\u003C/h2>\n\u003Cp>I kept one global \u003Ccode>src/app.css\u003C/code> instead of scoped component styles. For a site this size, global CSS with custom properties is simpler to reason about than per-component styles:\u003C/p>\n\u003Cpre>\u003Ccode class=\"language-css\">:root {\n  --evergreen:   #132a13;\n  --hunter-green: #31572c;\n  --fern:        #4f772d;\n  --palm-leaf:   #90a955;\n  --lime-cream:  #ecf39e;\n}\n\u003C/code>\u003C/pre>\n\u003Cp>Every component reads from these variables, so tweaking the palette is a single-file change.\u003C/p>\n\u003Ch2>Mobile Nav Without a Library\u003C/h2>\n\u003Cp>The hamburger nav closes on outside click using \u003Ccode>bind:this\u003C/code> — a direct reference to the DOM node — rather than a click listener on \u003Ccode>document\u003C/code>:\u003C/p>\n\u003Cpre>\u003Ccode class=\"language-svelte\">&lt;script&gt;\n  let navEl;\n  function handleWindowClick(e) {\n    if (navOpen &amp;&amp; !navEl.contains(e.target)) navOpen = false;\n  }\n&lt;/script&gt;\n\n&lt;svelte:window on:click={handleWindowClick} /&gt;\n&lt;nav bind:this={navEl}&gt;...&lt;/nav&gt;\n\u003C/code>\u003C/pre>\n\u003Cp>This avoids the a11y lint warning Svelte raises when you put \u003Ccode>on:click\u003C/code> on a non-interactive element, and it&#39;s simpler than a click-outside directive.\u003C/p>\n\u003Ch2>What I&#39;d Do Differently\u003C/h2>\n\u003Cul>\n\u003Cli>\u003Cstrong>Add syntax highlighting.\u003C/strong> \u003Ccode>marked\u003C/code> renders code blocks as plain \u003Ccode>&lt;pre&gt;&lt;code&gt;\u003C/code>, no token colors. Shiki or Prism would fix that.\u003C/li>\n\u003Cli>\u003Cstrong>RSS feed.\u003C/strong> Easy with SvelteKit — a \u003Ccode>src/routes/rss.xml/+server.js\u003C/code> that returns the posts as XML.\u003C/li>\n\u003Cli>\u003Cstrong>OG image generation.\u003C/strong> Auto-generated social preview cards per post would be a nice touch.\u003C/li>\n\u003C/ul>\n\u003Ch2>Stack\u003C/h2>\n\u003Ctable>\n\u003Cthead>\n\u003Ctr>\n\u003Cth>Layer\u003C/th>\n\u003Cth>Tool\u003C/th>\n\u003C/tr>\n\u003C/thead>\n\u003Ctbody>\u003Ctr>\n\u003Ctd>Framework\u003C/td>\n\u003Ctd>SvelteKit 2\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>Build\u003C/td>\n\u003Ctd>Vite 5\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>Markdown parsing\u003C/td>\n\u003Ctd>gray-matter + marked\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>CSS\u003C/td>\n\u003Ctd>Vanilla CSS, custom properties\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>Deployment\u003C/td>\n\u003Ctd>Static files (adapter-static)\u003C/td>\n\u003C/tr>\n\u003C/tbody>\u003C/table>\n\u003Cp>None of this is groundbreaking — it&#39;s a deliberately boring stack. For a personal site, boring is correct.\u003C/p>\n"},uses:{params:["slug"]}}],
+							form: null,
+							error: null
+						});
+					});
+				}
+			</script>
+		</div>
+  </body>
+</html>

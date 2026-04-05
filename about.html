@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jordan Lee — About</title>
+  <meta name="description" content="Senior Full Stack Engineer, technical writer, and open source contributor based in Portland, OR." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ── Navigation ── -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo" aria-label="Jordan Lee — Home">
+        <span class="logo-bracket">&lt;</span><span class="logo-name">jordan.dev</span><span class="logo-bracket">/&gt;</span>
+      </a>
+      <div class="nav-menu" id="navMenu" role="navigation" aria-label="Main navigation">
+        <a href="index.html" class="nav-link">Blog</a>
+        <a href="about.html" class="nav-link active" aria-current="page">About</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navMenu">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </button>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- ── About Hero: Split Layout ── -->
+    <section class="about-hero" aria-labelledby="about-name">
+      <div class="container">
+        <div class="about-hero-grid">
+
+          <!-- Portrait Side -->
+          <div class="portrait-side">
+            <div class="portrait-frame">
+              <div class="portrait-bg" aria-hidden="true"></div>
+              <div class="portrait-initials" aria-hidden="true">
+                <span class="initials-text">JL</span>
+                <span class="initials-label">Full Stack Dev</span>
+              </div>
+              <div class="portrait-corner-tl" aria-hidden="true"></div>
+              <div class="portrait-corner-bl" aria-hidden="true"></div>
+            </div>
+            <div class="portrait-deco"   aria-hidden="true"></div>
+            <div class="portrait-deco-2" aria-hidden="true"></div>
+          </div>
+
+          <!-- Bio Side -->
+          <div class="bio-side">
+            <div>
+              <span class="bio-greeting">Hello, I'm</span>
+              <h1 class="bio-name" id="about-name">Jordan Lee</h1>
+              <p class="bio-role">Senior Full Stack Engineer &amp; Technical Writer</p>
+            </div>
+
+            <div class="bio-description">
+              <p>
+                I'm a full stack developer with 7+ years of experience crafting performant, accessible, and maintainable web applications. I specialize in the TypeScript/React ecosystem with Node.js backends, and I have a deep appreciation for good system design and developer experience.
+              </p>
+              <p>
+                When I'm not writing code, I'm writing about it — breaking down complex topics into practical, actionable articles. I believe strongly in open source, thoughtful documentation, and the idea that the best software is the kind that doesn't need explaining.
+              </p>
+              <p>
+                Currently based in Portland, OR. Previously at Luminary Tech, Nexus Solutions, and Pixel &amp; Code Agency. Always open to interesting problems and conversations.
+              </p>
+            </div>
+
+            <div class="bio-actions">
+              <a href="contact.html" class="btn btn-primary">Get In Touch</a>
+              <a href="#" class="btn btn-outline" download aria-label="Download resume (PDF)">Download Resume</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Experience & Tech ── -->
+    <div class="about-sections">
+      <div class="container">
+
+        <!-- Experience Timeline -->
+        <section class="timeline-section" aria-labelledby="experience-heading">
+          <div class="section-header">
+            <span class="section-label">Experience</span>
+            <h2 class="section-title" id="experience-heading">Career Timeline</h2>
+            <div class="section-divider" aria-hidden="true"></div>
+          </div>
+
+          <div class="timeline" role="list">
+
+            <div class="timeline-item" role="listitem">
+              <div class="timeline-dot" aria-hidden="true"></div>
+              <div class="timeline-period">2024 — Present</div>
+              <h3 class="timeline-role">Senior Full Stack Engineer</h3>
+              <p class="timeline-company">Luminary Tech</p>
+              <p class="timeline-desc">
+                Lead development of a real-time collaborative platform serving 50k+ daily active users. Architecting microservices with Node.js and TypeScript, leading a front-end team of four, and owning the performance engineering roadmap. Reduced P95 API latency by 42% through targeted caching and query optimization.
+              </p>
+            </div>
+
+            <div class="timeline-item" role="listitem">
+              <div class="timeline-dot" aria-hidden="true"></div>
+              <div class="timeline-period">2021 — 2024</div>
+              <h3 class="timeline-role">Full Stack Developer</h3>
+              <p class="timeline-company">Nexus Solutions</p>
+              <p class="timeline-desc">
+                Built and maintained B2B SaaS products with React, Next.js, and a PostgreSQL / GraphQL backend. Reduced core page load times by 60% via code splitting and strategic caching. Hired, onboarded, and mentored two junior developers.
+              </p>
+            </div>
+
+            <div class="timeline-item" role="listitem">
+              <div class="timeline-dot" aria-hidden="true"></div>
+              <div class="timeline-period">2019 — 2021</div>
+              <h3 class="timeline-role">Junior Web Developer</h3>
+              <p class="timeline-company">Pixel &amp; Code Agency</p>
+              <p class="timeline-desc">
+                Delivered client websites and web apps across e-commerce, healthcare, and media. Worked across the full stack — from custom WordPress themes to bespoke React applications — for a client roster of 25+.
+              </p>
+            </div>
+
+            <div class="timeline-item" role="listitem">
+              <div class="timeline-dot" aria-hidden="true"></div>
+              <div class="timeline-period">2015 — 2019</div>
+              <h3 class="timeline-role">B.S. Computer Science</h3>
+              <p class="timeline-company">Oregon State University</p>
+              <p class="timeline-desc">
+                Specialized in software engineering and human-computer interaction. Graduated with honors. Active open source club contributor and student hackathon organizer — and where I wrote my first production API.
+              </p>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- Tech Stack -->
+        <section class="tech-section" aria-labelledby="tech-heading">
+          <div class="section-header">
+            <span class="section-label">Toolbelt</span>
+            <h2 class="section-title" id="tech-heading">Tech Stack</h2>
+            <div class="section-divider" aria-hidden="true"></div>
+          </div>
+
+          <div class="tech-grid" role="list">
+            <div class="tech-card" role="listitem"><div class="tech-emoji" aria-hidden="true">⚡</div><div class="tech-name">TypeScript</div></div>
+            <div class="tech-card" role="listitem"><div class="tech-emoji" aria-hidden="true">⚛️</div><div class="tech-name">React</div></div>
+            <div class="tech-card" role="listitem"><div class="tech-emoji" aria-hidden="true">🔺</div><div class="tech-name">Next.js</div></div>
+            <div class="tech-card" role="listitem"><div class="tech-emoji" aria-hidden="true">🟢</div><div class="tech-name">Node.js</div></div>
+            <div class="tech-card" role="listitem"><div class="tech-emoji" aria-hidden="true">🐍</div><div class="tech-name">Python</div></div>
+            <div class="tech-card" role="listitem"><div class="tech-emoji" aria-hidden="true">🐘</div><div class="tech-name">PostgreSQL</div></div>
+            <div class="tech-card" role="listitem"><div class="tech-emoji" aria-hidden="true">🔴</div><div class="tech-name">Redis</div></div>
+            <div class="tech-card" role="listitem"><div class="tech-emoji" aria-hidden="true">🐋</div><div class="tech-name">Docker</div></div>
+            <div class="tech-card" role="listitem"><div class="tech-emoji" aria-hidden="true">☁️</div><div class="tech-name">AWS</div></div>
+            <div class="tech-card" role="listitem"><div class="tech-emoji" aria-hidden="true">◼️</div><div class="tech-name">GraphQL</div></div>
+            <div class="tech-card" role="listitem"><div class="tech-emoji" aria-hidden="true">🌿</div><div class="tech-name">Git</div></div>
+            <div class="tech-card" role="listitem"><div class="tech-emoji" aria-hidden="true">🎨</div><div class="tech-name">Tailwind CSS</div></div>
+          </div>
+        </section>
+
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <p class="footer-text">© 2026 Jordan Lee. Crafted with care and a lot of coffee.</p>
+      <nav class="footer-links" aria-label="Footer">
+        <a href="index.html">Blog</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
