@@ -1,13 +1,13 @@
-<script lang="ts">
+<script>
   import { onMount } from 'svelte';
-  import { prepare, layout, type PreparedText } from '@chenglou/pretext';
+  import { prepare, layout } from '@chenglou/pretext';
 
   let text = 'Pretext measures multiline text without touching the DOM. Resize the width and see the line count and height update.';
   let fontSize = 16;
   let lineHeight = 24;
   let containerWidth = 360;
 
-  let prepared: PreparedText | null = null;
+  let prepared = null;
   let lineCount = 0;
   let height = 0;
 
