@@ -15,6 +15,8 @@ SneakerTracker is a Raspberry Pi 5 with a wide-angle USB camera pointed at my sh
 
 This post covers how it works, the problems I ran into, and the decisions that shaped the final system.
 
+![SneakerTracker Dashboard](/blog/sneakertracker-dashboard.png)
+
 ---
 
 ## The Hardware Setup
@@ -121,6 +123,8 @@ Zone crops are then offset by `(dx, dy)` before comparison. If drift exceeds 100
 
 ## Zone Drawing Tool
 
+![Zone editor — drawing detection zones over the live camera feed](/blog/sneakertracker-zones.png)
+
 Rather than hardcoding zone coordinates, I built a zone editor into the React dashboard. You click "Draw Zone" and drag rectangles directly over the live camera feed. Each rectangle maps to a zone in the database — stored as `(x, y, width, height)` as percentages of the frame dimensions so they survive camera resolution changes.
 
 The live feed is an MJPEG stream served by Flask on the Pi:
@@ -192,7 +196,11 @@ Four pages:
 
 **Stats** — aggregate wear data. Total wears, currently-out count, most-worn shoe, and a full wear leaderboard with average session duration.
 
+![Stats page — wear leaderboard](/blog/sneakertracker-stats.png)
+
 **Wear History** — chronological log of every wear session with timestamps, duration, and open sessions marked "Out now."
+
+![Wear history — chronological wear log](/blog/sneakertracker-wears.png)
 
 ---
 
