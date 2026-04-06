@@ -1,5 +1,5 @@
-﻿<svelte:head>
-  <title>Grayson McClead â€” Full Stack Developer</title>
+<svelte:head>
+  <title>Grayson McClead "” Full Stack Developer</title>
   <meta name="description" content="Full Stack Developer with 5+ years of experience building scalable web applications with React, Angular, and .NET, based in Austin, TX." />
 </svelte:head>
 
@@ -31,8 +31,8 @@
           <div class="bio-description">
             <p>
               I'm a full stack developer with 5+ years of experience building scalable web applications across the
-              JavaScript and .NET ecosystems. I work across the entire stack â€” from Angular and React frontends to
-              ASP.NET and Node.js backends â€” with a strong focus on performance, clean architecture, and shipping
+              JavaScript and .NET ecosystems. I work across the entire stack "” from Angular and React frontends to
+              ASP.NET and Node.js backends "” with a strong focus on performance, clean architecture, and shipping
               things that actually matter.
             </p>
             <p>
@@ -73,9 +73,9 @@
 
           <div class="timeline-item" role="listitem">
             <div class="timeline-dot" aria-hidden="true"></div>
-            <div class="timeline-period">2021 â€” Present</div>
+            <div class="timeline-period">2021 "” Present</div>
             <h3 class="timeline-role">Full Stack Developer</h3>
-            <p class="timeline-company">Sports Business Journal â€” Charlotte, NC</p>
+            <p class="timeline-company">Sports Business Journal "” Charlotte, NC</p>
             <p class="timeline-desc">
               Modernized legacy systems by implementing React and Angular, significantly improving performance and
               scalability. Led a full CMS migration that enhanced editorial workflows across the platform. Solely
@@ -87,9 +87,9 @@
 
           <div class="timeline-item" role="listitem">
             <div class="timeline-dot" aria-hidden="true"></div>
-            <div class="timeline-period">2019 â€” 2021</div>
+            <div class="timeline-period">2019 "” 2021</div>
             <h3 class="timeline-role">Full Stack Developer</h3>
-            <p class="timeline-company">Epsilon â€” TX</p>
+            <p class="timeline-company">Epsilon "” TX</p>
             <p class="timeline-desc">
               Designed and developed SPAs using React and HTML5/CSS3 for web and mobile platforms. Built RESTful
               APIs with Node.js and managed data with SQL Server. Created backend services for a healthcare
@@ -99,9 +99,9 @@
 
           <div class="timeline-item" role="listitem">
             <div class="timeline-dot" aria-hidden="true"></div>
-            <div class="timeline-period">2018 â€” 2019</div>
+            <div class="timeline-period">2018 "” 2019</div>
             <h3 class="timeline-role">Jr. Full Stack Developer</h3>
-            <p class="timeline-company">McKesson â€” TX</p>
+            <p class="timeline-company">McKesson "” TX</p>
             <p class="timeline-desc">
               Developed and deployed Node.js Web APIs on load-balanced instances. Built responsive UIs with React
               and Bootstrap, integrated RESTful services with client-side JavaScript validation, and contributed to
@@ -122,18 +122,18 @@
 
         <div class="tech-grid" role="list">
           {#each [
-            { emoji: 'ðŸŸ¨', name: 'JavaScript' },
-            { emoji: 'âš¡', name: 'TypeScript' },
-            { emoji: 'ðŸŸ£', name: 'C#' },
-            { emoji: 'âš›ï¸', name: 'React' },
-            { emoji: 'ðŸ”º', name: 'Angular' },
-            { emoji: 'ðŸŸ¢', name: 'Node.js' },
-            { emoji: 'ðŸ—ï¸', name: 'ASP.NET' },
-            { emoji: 'ðŸ˜', name: 'PostgreSQL' },
-            { emoji: 'ðŸ—„ï¸', name: 'SQL Server' },
-            { emoji: 'â˜ï¸', name: 'Azure' },
-            { emoji: 'ðŸŒ¿', name: 'Git' },
-            { emoji: 'ðŸ', name: 'Python' }
+            { emoji: '🟨', name: 'JavaScript' },
+            { emoji: '⚡', name: 'TypeScript' },
+            { emoji: '🟣', name: 'C#' },
+            { emoji: '⚛️', name: 'React' },
+            { emoji: '🔺', name: 'Angular' },
+            { emoji: '🟢', name: 'Node.js' },
+            { emoji: '🏗️', name: 'ASP.NET' },
+            { emoji: '🐘', name: 'PostgreSQL' },
+            { emoji: '🗄️', name: 'SQL Server' },
+            { emoji: '☁️', name: 'Azure' },
+            { emoji: '🌿', name: 'Git' },
+            { emoji: '🐍', name: 'Python' }
           ] as tech}
             <div class="tech-card" role="listitem">
               <div class="tech-emoji" aria-hidden="true">{tech.emoji}</div>
