@@ -49,7 +49,7 @@
         class:active={$page.url.pathname === '/'}
         aria-current={$page.url.pathname === '/' ? 'page' : undefined}
         on:click={closeNav}
-      >About</a>
+      >Home</a>
       <a
         href="/blog"
         class="nav-link"
@@ -64,13 +64,6 @@
         aria-current={$page.url.pathname === '/contact' ? 'page' : undefined}
         on:click={closeNav}
       >Contact</a>
-      <a
-        href="/pretext"
-        class="nav-link"
-        class:active={$page.url.pathname === '/pretext'}
-        aria-current={$page.url.pathname === '/pretext' ? 'page' : undefined}
-        on:click={closeNav}
-      >Pretext demo</a>
     </div>
 
     <button
@@ -94,8 +87,8 @@
   <div class="footer-inner">
     <p class="footer-text">© 2026 Grayson McClead. Crafted with care and a lot of coffee.</p>
     <nav class="footer-links" aria-label="Footer">
-      <a href="/">Blog</a>
-      <a href="/about">About</a>
+      <a href="/">Home</a>
+      <a href="/blog">Blog</a>
       <a href="/contact">Contact</a>
     </nav>
   </div>

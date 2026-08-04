@@ -87,21 +87,21 @@
             <div class="contact-detail-icon" aria-hidden="true">📍</div>
             <div>
               <div class="contact-detail-label">Location</div>
-              <div class="contact-detail-text">Portland, Oregon, USA</div>
+              <div class="contact-detail-text">Austin, TX, USA</div>
             </div>
           </div>
           <div class="contact-detail-item">
             <div class="contact-detail-icon" aria-hidden="true">📧</div>
             <div>
               <div class="contact-detail-label">Email</div>
-              <div class="contact-detail-text">hello@jordan.dev</div>
+              <div class="contact-detail-text">elgrayso@gmail.com</div>
             </div>
           </div>
           <div class="contact-detail-item">
             <div class="contact-detail-icon" aria-hidden="true">⏰</div>
             <div>
               <div class="contact-detail-label">Timezone</div>
-              <div class="contact-detail-text">Pacific Time (PT) — UTC−7</div>
+              <div class="contact-detail-text">Central Time (CT) — UTC−5</div>
             </div>
           </div>
         </div>
